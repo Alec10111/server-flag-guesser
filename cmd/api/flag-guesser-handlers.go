@@ -8,8 +8,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func homePageHandler(w http.ResponseWriter, req *http.Request) {
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
 
+func homePageHandler(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
 	jsonRes, err := json.Marshal("Available")
 	if err != nil {
 		fmt.Println(err)
@@ -20,6 +24,7 @@ func homePageHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(jsonRes)
 }
 func getCountryInfo(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
 	params := httprouter.ParamsFromContext(req.Context())
 	info := fetchDescription(params.ByName("country"))
 

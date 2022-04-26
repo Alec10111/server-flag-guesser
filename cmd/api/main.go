@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 const version = "1.0.0"
@@ -29,13 +27,6 @@ type AppStatus struct {
 type application struct {
 	config config
 	logger *log.Logger
-}
-
-func router() *httprouter.Router {
-	router := httprouter.New()
-	router.HandlerFunc(http.MethodGet, "/", homePageHandler)
-	router.HandlerFunc(http.MethodGet, "/getCountryInfo/:country", getCountryInfo)
-	return router
 }
 
 func main() {
