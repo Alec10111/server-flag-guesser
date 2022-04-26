@@ -41,7 +41,8 @@ func fetchDescription(name string) string {
 	fmt.Println("Scrapping Complete")
 
 	c.Visit("https://en.wikipedia.org/wiki/" + name)
-	return removeBrackets(removeBrackets(result, "(", ")"), "[", "]")
+	result = removeBrackets(removeBrackets(result, "(", ")"), "[", "]")
+	return result[:len(result)-1]
 }
 
 func (app *application) writejson(w http.ResponseWriter, status int, data interface{}, wrap string) error {
