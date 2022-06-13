@@ -31,7 +31,7 @@ type application struct {
 
 func main() {
 	srv := &http.Server{
-		Addr:         fmt.Sprint(":3001"),
+		Addr:         fmt.Sprint(":" + os.Getenv("PORT")),
 		Handler:      router(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  30 * time.Second,
@@ -40,7 +40,7 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
-	logger.Println("Starting server on port 3001")
+	logger.Println("Starting server on port " + os.Getenv("PORT"))
 
 	err := srv.ListenAndServe()
 	if err != nil {
