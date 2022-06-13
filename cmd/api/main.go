@@ -31,7 +31,7 @@ type application struct {
 
 func main() {
 	srv := &http.Server{
-		Addr:         fmt.Sprint(":$PORT"),
+		Addr:         fmt.Sprint(":3001"),
 		Handler:      router(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  30 * time.Second,
