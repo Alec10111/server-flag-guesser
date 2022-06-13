@@ -9,6 +9,13 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
+//func formatDash(text string) string {
+//for _, char := range text {
+//
+//}
+//	return ""
+//}
+
 func removeBrackets(text string, opener string, closer string) string {
 	var res string
 	var stack []string
