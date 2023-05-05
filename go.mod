@@ -1,6 +1,6 @@
-module server-flag
+module fgapi
 
-go 1.18
+go 1.20
 
 require (
 	github.com/gocolly/colly/v2 v2.1.0

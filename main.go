@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"fgapi/src/routes"
 	"log"
 	"net/http"
 	"os"
@@ -24,15 +24,16 @@ type AppStatus struct {
 	Version     string `json:"version"`
 }
 
-type application struct {
-	config config
-	logger *log.Logger
-}
+// type application struct {
+// 	config config
+// 	logger *log.Logger
+// }
 
 func main() {
 	srv := &http.Server{
-		Addr:         fmt.Sprint(":" + os.Getenv("PORT")),
-		Handler:      router(),
+		// Addr:         fmt.Sprint(":" + os.Getenv("PORT")),
+		Addr:         ":8080",
+		Handler:      routes.Router(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
