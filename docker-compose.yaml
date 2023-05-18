@@ -1,9 +1,24 @@
 version: '3.9'
 
 services:
-  amb-backend:
+  flag-api:
     build: .
     ports:
-      - 8000:8000
+      - 8000:8080
     volumes:
       - .:/app
+  flag-db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      - POSTGRES_USER=flag
+      - POSTGRES_PASSWORD=flag
+    volumes:
+      - db:/var/lib/postgresql/data  
+
+volumes:
+  db:
+    driver: local
+  

@@ -1,11 +1,15 @@
 package main
 
 import (
+	"fgapi/src/models"
 	"fgapi/src/routes"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 const version = "1.0.0"
@@ -30,6 +34,15 @@ type AppStatus struct {
 // }
 
 func main() {
+
+	dsn := "host=flag-db user=flag password=flag dbname=flag port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	db.AutoMigrate(&models.Country{})
+
 	srv := &http.Server{
 		// Addr:         fmt.Sprint(":" + os.Getenv("PORT")),
 		Addr:         ":8080",
@@ -43,7 +56,7 @@ func main() {
 
 	logger.Println("Starting server on port " + os.Getenv("PORT"))
 
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		panic(err)
 	}
